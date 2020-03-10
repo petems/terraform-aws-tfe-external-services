@@ -1,0 +1,5 @@
+.terraform
+*.rli
+terraform
+*.tfstate*
+work
