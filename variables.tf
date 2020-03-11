@@ -7,10 +7,6 @@ variable "hostname" {
   description = "The hostname. For example 'workshop'"
 }
 
-variable "setup_bucket" {
-
-}
-
 variable "domain" {
   description = "The domain that has a corresponding wildcard cert in AWS ACM"
 }

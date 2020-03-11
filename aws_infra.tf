@@ -112,29 +112,10 @@ resource "aws_acm_certificate_validation" "cert" {
 # External servise infra - DB and S3 storage
 module "external" {
   source  = "./modules/external-services"
-  version = "0.1.0"
-
+  version = "0.1.2"
+  
   vpc_id     = "${aws_vpc.demo-tfe.id}"
   install_id = "${module.tfe-cluster.install_id}"
-}
-
-data "aws_iam_policy_document" "setup-bucket" {
-  statement {
-    resources = [
-      "arn:aws:s3:::${var.setup_bucket}",
-      "arn:aws:s3:::${var.setup_bucket}/*",
-    ]
-
-    actions = [
-      "s3:*",
-    ]
-  }
-}
-
-resource "aws_iam_role_policy" "setup-bucket" {
-  role   = "${module.tfe-cluster.iam_role}"
-  name   = "${var.setup_bucket}-${module.tfe-cluster.install_id}"
-  policy = "${data.aws_iam_policy_document.setup-bucket.json}"
 }
 
 # Outputs

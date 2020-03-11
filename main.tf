@@ -10,16 +10,17 @@ module "tfe-cluster" {
   allow_list              = "${var.allow_list}"
   hostname                = "${var.hostname}"
   prefix                  = "${var.prefix}"
+
+  primary_count           = 3
+  secondary_count         = 5
   
   postgresql_user         = "${module.external.database_username}"
   postgresql_password     = "${module.external.database_password}"
   postgresql_address      = "${module.external.database_endpoint}"
   postgresql_database     = "${module.external.database_name}"
   postgresql_extra_params = "sslmode=disable"
-
   s3_bucket               = "${module.external.s3_bucket}"
-  s3_region               = "${var.region}"
-
+  s3_region               = "eu-west-1"
   aws_access_key_id       = "${module.external.iam_access_key}"
   aws_secret_access_key   = "${module.external.iam_secret_key}"
 }
